@@ -19,7 +19,7 @@ spec:
         app: empms-attendance
     spec:
       containers:
-      - image: opstree/empms-attendance:0.1
+      - image: 702037529261.dkr.ecr.us-west-2.amazonaws.com/attendance-microservice
         imagePullPolicy: Always
         name: empms-attendance
         ports:

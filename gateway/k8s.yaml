@@ -19,7 +19,7 @@ spec:
         app: empms-gateway
     spec:
       containers:
-      - image: opstree/empms-gateway:0.1
+      - image: 702037529261.dkr.ecr.us-west-2.amazonaws.com/gateway-microservice
         imagePullPolicy: Always
         name: empms-gateway
         ports:

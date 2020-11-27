@@ -19,7 +19,7 @@ spec:
         app: empms-salary
     spec:
       containers:
-      - image: opstree/empms-salary:0.1
+      - image: 702037529261.dkr.ecr.us-west-2.amazonaws.com/salary-microservice
         imagePullPolicy: Always
         name: empms-salary
         ports:
