@@ -1,0 +1,42 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: empms-employee
+  name: empms-employee
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: empms-employee
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: empms-employee
+    spec:
+      containers:
+      - image: opstree/empms-management:0.1
+        imagePullPolicy: Always
+        name: empms-employee
+        ports:
+        - containerPort: 8083
+        resources: {}
+        env:
+          - name: DEPLOY_TIME
+            value: 19:40 
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: empms-employee
+spec:
+  type: ClusterIP
+  selector:
+    app: empms-employee
+  ports:
+  - protocol: TCP
+    port: 8083

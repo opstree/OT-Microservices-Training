@@ -1,0 +1,42 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: empms-frontend
+  name: empms-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: empms-frontend
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: empms-frontend
+    spec:
+      containers:
+      - image: opstree/empms-frontend:0.1
+        imagePullPolicy: Always
+        name: empms-frontend
+        ports:
+        - containerPort: 5000
+        resources: {}
+        env:
+          - name: DEPLOY_TIME
+            value: 22:10
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: empms-frontend
+spec:
+  type: ClusterIP
+  selector:
+    app: empms-frontend
+  ports:
+  - protocol: TCP
+    port: 5000

@@ -1,0 +1,27 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: empms-salary
+  name: empms-salary
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: empms-salary
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: empms-salary
+    spec:
+      containers:
+      - image: opstree/empms-salary:0.1
+        imagePullPolicy: Always
+        name: empms-salary
+        ports:
+        - containerPort: 8082
+        resources: {}

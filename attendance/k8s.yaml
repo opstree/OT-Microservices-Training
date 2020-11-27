@@ -1,0 +1,42 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: empms-attendance
+  name: empms-attendance
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: empms-attendance
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: empms-attendance
+    spec:
+      containers:
+      - image: opstree/empms-attendance:0.1
+        imagePullPolicy: Always
+        name: empms-attendance
+        ports:
+        - containerPort: 8081
+        resources: {}
+        env:
+          - name: DEPLOY_TIME
+            value: 18:35
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: empms-attendance
+spec:
+  type: ClusterIP
+  selector:
+    app: empms-attendance
+  ports:
+  - protocol: TCP
+    port: 8081

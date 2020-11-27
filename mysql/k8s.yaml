@@ -1,0 +1,42 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: empms-db
+  name: empms-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: empms-db
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: empms-db
+    spec:
+      containers:
+      - image: opstree/empms-db:0.1
+        imagePullPolicy: Always
+        name: empms-db
+        ports:
+        - containerPort: 3306
+        resources: {}
+        env:
+          - name: DEPLOY_TIME
+            value: 19:27  
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: empms-db
+spec:
+  type: ClusterIP
+  selector:
+    app: empms-db
+  ports:
+  - protocol: TCP
+    port: 3306
