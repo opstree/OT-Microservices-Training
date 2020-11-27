@@ -3,7 +3,7 @@ node {
         checkout scm
     }
     stage("Building image") {
-        dir("attendance") {
+        dir("salary") {
             docker.build('${JOB_NAME}', '-f Dockerfile .')
         }
     }
