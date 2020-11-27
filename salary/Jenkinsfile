@@ -1,0 +1,15 @@
+node {
+    stage("Checkout") {
+        checkout scm
+    }
+    stage("Building image") {
+        dir("attendance") {
+            docker.build('${JOB_NAME}', '-f Dockerfile .')
+        }
+    }
+    stage("Pushing image to ECR") {
+        docker.withRegistry('https://702037529261.dkr.ecr.us-west-2.amazonaws.com', 'spinnaker-registry') {
+            docker.image('${JOB_NAME}').push('${BUILD_ID}')
+        }
+    }
+}
